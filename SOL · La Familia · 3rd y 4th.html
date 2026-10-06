@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SOL · La Familia · 3rd y 4th</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sun:#FFC93C; --sun-deep:#FFB100; --mango:#FF8A3D; --sky:#3FB8E8;
+  --grass:#5FCB7A; --berry:#FF6B9D; --grape:#9B7BE0;
+  --bg:#FFF9EC; --card:#FFFFFF; --ink:#3A2E1F; --ink-soft:#6B5B44; --line:#EFE6D2;
+  --shadow:0 8px 0 rgba(58,46,31,.12);
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#2A2218;--card:#3A2F22;--ink:#FFF4DE;--ink-soft:#D9C9A8;--line:#5A4A36;}
+}
+:root[data-theme="dark"]{--bg:#2A2218;--card:#3A2F22;--ink:#FFF4DE;--ink-soft:#D9C9A8;--line:#5A4A36;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit;}
+body{
+  margin:0;min-height:100%;color:var(--ink);font-family:'Quicksand',system-ui,sans-serif;
+  background:
+    radial-gradient(circle at 92% -8%, rgba(255,201,60,.35), transparent 42%),
+    radial-gradient(circle at -6% 18%, rgba(63,184,232,.22), transparent 40%),
+    var(--bg);
+}
+button{font-family:inherit;}
+button:focus-visible{outline:4px solid var(--sky);outline-offset:3px;}
+.wrap{max-width:1180px;margin:0 auto;padding:18px 18px 50px;}
+
+header{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px;}
+.sun{width:62px;height:62px;flex:0 0 auto;animation:spin 22s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+h1{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(28px,4vw,42px);margin:0;line-height:1;}
+.sub{font-weight:700;color:var(--ink-soft);font-size:15px;margin-top:2px;}
+.hdr-right{margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.lvl{display:flex;background:var(--card);border:3px solid var(--sun-deep);border-radius:18px;overflow:hidden;}
+.lvl button{border:none;background:none;color:var(--ink);font-family:'Baloo 2',sans-serif;font-weight:800;font-size:18px;padding:8px 18px;cursor:pointer;}
+.lvl button.on{background:var(--sun);color:#3A2E1F;}
+.voz-btn.off{background:#EFE6D2;color:#6B5B44;border-color:#D9CDB4;}
+.voz-btn.on{background:var(--grass);color:#3A2E1F;border-color:#3FAE5E;}
+.voz-btn{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:17px;background:var(--card);color:var(--ink);border:3px solid var(--line);border-radius:16px;padding:8px 14px;cursor:pointer;}
+
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;}
+.tab{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(16px,2vw,20px);color:#fff;border:4px solid transparent;border-radius:20px;padding:10px 20px;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.15);}
+.tab:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.15);}
+.tab.on{border-color:var(--ink);transform:translateY(-2px);}
+.t1{background:var(--sky);} .t2{background:var(--berry);} .t3{background:var(--grape);} .t4{background:var(--mango);}
+
+.panel{display:none;}
+.panel.on{display:block;}
+.card{background:var(--card);border-radius:28px;padding:22px;box-shadow:var(--shadow);}
+.teacher{margin-top:14px;text-align:center;font-weight:700;font-size:14px;color:var(--ink-soft);}
+
+.bigbtn{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(18px,2.2vw,24px);color:#fff;border:none;border-radius:20px;padding:12px 26px;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.15);}
+.bigbtn:active{transform:translateY(3px);box-shadow:0 3px 0 rgba(0,0,0,.15);}
+.bigbtn:disabled{opacity:.35;cursor:default;}
+.b-mango{background:var(--mango);} .b-sky{background:var(--sky);} .b-grass{background:#3FAE5E;} .b-grape{background:var(--grape);} .b-berry{background:var(--berry);}
+.row{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin-top:18px;}
+
+/* CONOCE */
+.conoce{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;}
+.arrow{width:clamp(56px,7vw,84px);height:clamp(56px,7vw,84px);border-radius:50%;border:4px solid var(--sun-deep);background:var(--card);color:var(--ink);font-size:clamp(26px,3.4vw,38px);font-weight:800;cursor:pointer;}
+.co-stage{display:flex;align-items:center;justify-content:center;gap:clamp(10px,4vw,50px);flex-wrap:wrap;}
+.co-fig{height:min(52vh,400px);aspect-ratio:120/200;cursor:pointer;background:none;border:none;padding:0;}
+.co-fig svg{width:100%;height:100%;}
+.co-word{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(64px,11vw,140px);line-height:.95;}
+.co-color{display:inline-flex;align-items:center;gap:12px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(28px,4vw,44px);margin-top:6px;}
+.swatch{width:clamp(30px,4vw,44px);height:clamp(30px,4vw,44px);border-radius:50%;border:3px solid rgba(0,0,0,.15);}
+.dots{display:flex;gap:10px;justify-content:center;margin-top:14px;}
+.dot{width:16px;height:16px;border-radius:50%;background:var(--line);}
+.dot.on{background:var(--mango);}
+
+/* DÓNDE / CUÁNTOS shared */
+.prompt{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;text-align:center;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(32px,5vw,58px);line-height:1.1;}
+.say-btn{font-size:clamp(26px,3vw,34px);background:var(--sun);border:none;border-radius:50%;width:clamp(56px,6vw,70px);height:clamp(56px,6vw,70px);cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.15);flex:0 0 auto;}
+.scene{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:clamp(8px,2vw,22px);margin-top:18px;min-height:220px;}
+.who{background:none;border:5px solid transparent;border-radius:24px;padding:6px;cursor:pointer;width:clamp(110px,13vw,170px);aspect-ratio:120/200;position:relative;}
+.who svg{width:100%;height:100%;}
+.who:hover{background:rgba(255,201,60,.15);}
+.who.correct{border-color:#3FAE5E;background:rgba(95,203,122,.18);animation:hop .5s ease;}
+.who.wrong{animation:shake .35s ease;}
+@keyframes hop{40%{transform:translateY(-18px);}}
+@keyframes shake{25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
+.feedback{text-align:center;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(24px,3.4vw,38px);min-height:48px;margin-top:10px;}
+.ok{color:#2E9E52;} .no{color:#E0506B;}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:16px;color:var(--ink-soft);cursor:pointer;}
+.toggle input{width:22px;height:22px;}
+
+/* CUÁNTOS */
+.scene.count .who{width:clamp(80px,9vw,120px);}
+.badge{position:absolute;top:-6px;right:-6px;width:46px;height:46px;border-radius:50%;background:var(--mango);color:#fff;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:26px;display:none;align-items:center;justify-content:center;box-shadow:0 4px 0 rgba(0,0,0,.18);}
+.who.counted .badge{display:flex;}
+.who.counted{animation:hop .45s ease;}
+.answer{text-align:center;margin-top:8px;min-height:90px;}
+.answer .num{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(60px,9vw,110px);line-height:1;color:var(--mango);}
+.answer .phrase{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(26px,3.6vw,42px);}
+
+/* DEDOS */
+.hand{display:flex;justify-content:center;align-items:flex-end;gap:clamp(8px,1.8vw,20px);margin-top:10px;}
+.finger{border:none;cursor:pointer;border-radius:999px 999px 34px 34px;padding:10px 6px 0;width:clamp(96px,12vw,150px);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;box-shadow:0 6px 0 rgba(0,0,0,.12);transition:transform .2s ease;}
+.finger svg{width:100%;aspect-ratio:120/200;}
+.finger .nm{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(20px,2.4vw,28px);color:#3A2E1F;padding:4px 0 12px;}
+.finger.lit{transform:translateY(-26px) scale(1.06);outline:5px solid var(--sun-deep);}
+.finger.wig{animation:wig .5s ease;}
+@keyframes wig{25%{transform:rotate(-8deg);}75%{transform:rotate(8deg);}}
+.lyric{text-align:center;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(30px,4.6vw,54px);min-height:66px;margin-top:22px;}
+
+/* VOZ */
+.voz{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;align-items:center;justify-content:center;z-index:50;padding:18px;}
+.voz.on{display:flex;}
+.voz .card{max-width:460px;width:100%;}
+.voz h3{font-family:'Baloo 2',sans-serif;font-size:26px;margin:0 0 10px;}
+.voz select{width:100%;font-family:inherit;font-weight:700;font-size:17px;padding:10px;border-radius:14px;border:3px solid var(--line);background:var(--card);color:var(--ink);}
+.voz p{font-size:14px;font-weight:600;color:var(--ink-soft);}
+
+.confetti{position:fixed;top:-20px;width:14px;height:14px;border-radius:3px;z-index:99;pointer-events:none;animation:fall 2s ease-in forwards;}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg);}}
+@media (prefers-reduced-motion:reduce){.sun{animation:none;} .confetti{display:none;}}
+@media (max-width:700px){
+  .conoce{grid-template-columns:1fr;}
+  .conoce .arrow{display:none;}
+  .hdr-right{margin-left:0;}
+}
+.stars{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:20px;background:var(--card);border:3px solid var(--sun-deep);border-radius:16px;padding:6px 14px;}
+.voz-btn.off{background:#EFE6D2;color:#6B5B44;border-color:#D9CDB4;}
+.voz-btn.on{background:var(--grass);color:#3A2E1F;border-color:#3FAE5E;}
+.tab{font-size:clamp(14px,1.6vw,18px);padding:9px 16px;}
+.t5{background:var(--grass);color:#3A2E1F;}
+.hint{text-align:center;font-weight:700;color:var(--ink-soft);font-size:15px;margin-bottom:10px;}
+.score{display:flex;justify-content:space-between;font-family:'Baloo 2',sans-serif;font-weight:700;color:var(--ink-soft);font-size:15px;margin-bottom:8px;}
+.score b{color:var(--ink);}
+
+/* TARJETAS */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;}
+.flip{perspective:1000px;height:230px;cursor:pointer;background:none;border:none;padding:0;}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d;}
+.flip.on .flip-in{transform:rotateY(180deg);}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;box-shadow:var(--shadow);}
+.face.front{background:var(--card);border:3px solid var(--line);}
+.face.front svg{height:150px;}
+.face .w{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:26px;color:var(--ink);}
+.face.back{transform:rotateY(180deg);color:#fff;}
+.face.back .w{color:#fff;font-size:24px;}
+.face.back small{font-weight:700;font-size:14px;opacity:.95;}
+.badge-new{position:absolute;top:8px;left:8px;background:var(--sun);color:#3A2E1F;font-weight:800;font-size:12px;border-radius:10px;padding:2px 8px;}
+
+/* EMPAREJAR */
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.pcol-l{font-family:'Baloo 2',sans-serif;font-weight:700;color:var(--ink-soft);font-size:14px;margin-bottom:6px;}
+.pi{display:block;width:100%;text-align:left;background:var(--card);color:var(--ink);border:3px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px;font-family:'Quicksand',sans-serif;font-weight:700;font-size:18px;cursor:pointer;}
+.pi.sel{border-color:var(--sky);background:#EAF7FC;color:#3A2E1F;}
+.pi.ok{border-color:#3FAE5E;background:#E9F9EE;color:#2E9E52;cursor:default;}
+.pi.bad{border-color:var(--berry);background:#FFEAF1;color:#3A2E1F;animation:shake .3s ease;}
+
+/* QUIÉN ES */
+.clue-box{background:#FFF4E0;color:#6B4400;border-radius:20px;padding:14px 20px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(22px,2.6vw,30px);text-align:center;line-height:1.3;}
+.gw{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px;}
+.gw-card{background:var(--card);border:4px solid var(--line);border-radius:20px;padding:8px 6px 10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;color:var(--ink);font-family:inherit;}
+.gw-card svg{height:clamp(110px,15vh,150px);}
+.gw-card .nm{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:20px;line-height:1.1;}
+.gw-card .age{font-weight:800;font-size:14px;background:var(--sun);color:#3A2E1F;border-radius:10px;padding:1px 10px;margin-top:3px;}
+.gw-card.ok{border-color:#3FAE5E;background:#E9F9EE;color:#3A2E1F;}
+.gw-card.bad{border-color:var(--berry);animation:shake .3s ease;}
+.gw-card.dim{opacity:.35;}
+
+/* CUÁNTAS COME */
+.eat{display:flex;align-items:center;justify-content:center;gap:clamp(14px,3vw,36px);flex-wrap:wrap;margin-top:10px;}
+.eater{position:relative;display:flex;flex-direction:column;align-items:center;}
+.eater-fig{height:min(34vh,260px);aspect-ratio:120/200;}
+.eater-fig svg{width:100%;height:100%;}
+.eater-fig.chomp{animation:chomp .3s ease;}
+@keyframes chomp{50%{transform:scale(1.06) rotate(-3deg);}}
+.nam{position:absolute;top:2%;right:-34%;background:#fff;border:3px solid #EFE6D2;border-radius:18px;padding:4px 12px;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:20px;color:#3A2E1F;opacity:0;transition:opacity .2s;}
+.nam.on{opacity:1;}
+.plate{display:flex;flex-wrap:wrap;justify-content:center;align-content:center;gap:8px;width:min(600px,92vw);min-height:200px;padding:26px 34px;border-radius:50%;background:#FFFFFF;border:4px solid #EFE6D2;box-shadow:inset 0 0 0 16px #FBF5E8, inset 0 0 0 19px #EFE6D2, var(--shadow);}
+.food{background:none;border:none;padding:0;cursor:pointer;width:clamp(40px,4.2vw,56px);height:clamp(40px,4.2vw,56px);}
+.food svg{width:100%;height:100%;}
+.food.bad{animation:shake .35s ease;}
+.food.eaten{visibility:hidden;}
+.frame{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(24px,2.8vw,32px);margin-top:14px;}
+.num-in{font-family:'Quicksand',sans-serif;font-weight:700;font-size:24px;width:220px;padding:8px 12px;border-radius:14px;border:3px solid var(--line);text-align:center;background:var(--card);color:var(--ink);}
+.num-in:focus{outline:none;border-color:var(--sky);}
+
+/* ÁRBOL */
+.builder{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;align-items:end;}
+.fld label{display:block;font-weight:800;font-size:14px;color:var(--ink-soft);margin-bottom:4px;}
+.fld select,.fld input{width:100%;font-family:'Quicksand',sans-serif;font-weight:700;font-size:17px;padding:9px 10px;border-radius:12px;border:3px solid var(--line);background:var(--card);color:var(--ink);}
+.sw-row{display:flex;flex-wrap:wrap;gap:6px;}
+.sw{width:30px;height:30px;border-radius:50%;border:3px solid rgba(0,0,0,.15);cursor:pointer;padding:0;}
+.sw.on{outline:4px solid var(--ink);outline-offset:2px;}
+.gen{margin-top:16px;}
+.gen h4{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:20px;margin:0 0 6px;color:var(--ink-soft);}
+.gen-row{display:flex;flex-wrap:wrap;gap:12px;min-height:40px;}
+.tree-card{position:relative;background:var(--card);border:3px solid var(--line);border-radius:18px;padding:6px 10px 8px;width:140px;text-align:center;}
+.tree-card svg{height:110px;}
+.tree-card .nm{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:18px;line-height:1.1;}
+.tree-card .rl{font-weight:700;font-size:13px;color:var(--ink-soft);}
+.tree-card .x{position:absolute;top:4px;right:6px;background:none;border:none;font-size:16px;cursor:pointer;color:var(--ink-soft);}
+.sentences{margin-top:16px;background:#FFF4E0;color:#6B4400;border-radius:18px;padding:14px 18px;font-weight:700;font-size:18px;line-height:1.6;}
+.empty{color:var(--ink-soft);font-weight:700;font-size:15px;}
+@media (max-width:760px){ .gw{grid-template-columns:repeat(2,1fr);} .pairs{gap:8px;} .stars{display:none;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <svg class="sun" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="26" fill="#FFC93C" stroke="#FF8A3D" stroke-width="3"/>
+      <circle cx="41" cy="46" r="4" fill="#3A2E1F"/><circle cx="59" cy="46" r="4" fill="#3A2E1F"/>
+      <path d="M40 58 Q50 66 60 58" stroke="#3A2E1F" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <g stroke="#FF8A3D" stroke-width="5" stroke-linecap="round">
+        <line x1="50" y1="6" x2="50" y2="16"/><line x1="50" y1="84" x2="50" y2="94"/>
+        <line x1="6" y1="50" x2="16" y2="50"/><line x1="84" y1="50" x2="94" y2="50"/>
+        <line x1="18" y1="18" x2="25" y2="25"/><line x1="75" y1="75" x2="82" y2="82"/>
+        <line x1="82" y1="18" x2="75" y2="25"/><line x1="25" y1="75" x2="18" y2="82"/>
+      </g>
+    </svg>
+    <div>
+      <h1>La Familia</h1>
+      <div class="sub">SOL · Semana 7 · 3rd y 4th grade</div>
+    </div>
+    <div class="hdr-right">
+      <div class="stars">⭐ <span id="stars">0</span></div>
+      <button class="voz-btn" id="voz-toggle" onclick="toggleVoz()"></button>
+      <button class="voz-btn" onclick="openVoz()" aria-label="Elegir voz" title="Elegir voz">⚙️</button>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab t1 on" data-m="tar" onclick="showMode('tar')">🧠 Tarjetas</button>
+    <button class="tab t2" data-m="emp" onclick="showMode('emp')">🧩 Emparejar</button>
+    <button class="tab t3" data-m="qe" onclick="showMode('qe')">🕵️ ¿Quién es?</button>
+    <button class="tab t4" data-m="cc" onclick="showMode('cc')">🍇 ¿Cuántas come?</button>
+    <button class="tab t5" data-m="arb" onclick="showMode('arb')">🌳 Mi árbol familiar</button>
+  </nav>
+
+  <!-- TARJETAS -->
+  <section class="panel on" id="p-tar">
+    <div class="hint">Toca cada tarjeta para ver qué significa. ⭐ = palabra nueva.</div>
+    <div class="fgrid" id="t-grid"></div>
+  </section>
+
+  <!-- EMPAREJAR -->
+  <section class="panel" id="p-emp">
+    <div class="card">
+      <div class="score"><span>Rondas ganadas: <b id="e-won">0</b></span><span>Parejas: <b id="e-found">0</b> de <b id="e-total">6</b></span></div>
+      <div class="pairs">
+        <div><div class="pcol-l">Español</div><div id="e-es"></div></div>
+        <div><div class="pcol-l">English</div><div id="e-en"></div></div>
+      </div>
+      <div class="row"><button class="bigbtn b-grass" onclick="newPairs()">🔄 Nueva ronda</button></div>
+    </div>
+  </section>
+
+  <!-- QUIÉN ES -->
+  <section class="panel" id="p-qe">
+    <div class="card">
+      <div class="score"><span>✅ <b id="q-ok">0</b> de <b id="q-tot">0</b></span><span>🔥 racha <b id="q-streak">0</b></span></div>
+      <div class="clue-box"><span id="q-clue"></span> <button class="say-btn" style="width:46px;height:46px;font-size:22px;vertical-align:middle" onclick="say($('q-clue').textContent)" aria-label="Escuchar">🔊</button></div>
+      <div class="gw" id="q-grid"></div>
+      <div class="feedback" id="q-fb"></div>
+      <div class="row"><button class="bigbtn b-grass" onclick="newQE()">Siguiente ➡</button></div>
+    </div>
+  </section>
+
+  <!-- CUÁNTAS COME -->
+  <section class="panel" id="p-cc">
+    <div class="card">
+      <div class="score"><span>✅ <b id="c-ok">0</b> correctas</span><span><label class="toggle"><input type="checkbox" id="c-col" onchange="newCC()"> Gomitas de un color</label></span></div>
+      <div class="prompt" style="font-size:clamp(26px,3.4vw,40px)"><span id="c-prompt"></span></div>
+      <div class="eat">
+        <div class="eater">
+          <div class="eater-fig" id="c-fig"></div>
+          <div class="nam" id="c-nam">¡Ñam!</div>
+        </div>
+        <div class="plate" id="c-plate"></div>
+      </div>
+      <div class="frame"><span id="c-pre"></span><input class="num-in" id="c-in" placeholder="número en letras" autocomplete="off" spellcheck="false"><span id="c-post"></span></div>
+      <div class="row">
+        <button class="bigbtn b-mango" onclick="checkCC()">Revisar ✓</button>
+        <button class="bigbtn b-grass" onclick="newCC()">Siguiente ➡</button>
+      </div>
+      <div class="feedback" id="c-fb"></div>
+      <div class="teacher">Tip: click the food to count it (it gets eaten!). Then write the number in letters.</div>
+    </div>
+  </section>
+
+  <!-- ÁRBOL -->
+  <section class="panel" id="p-arb">
+    <div class="card">
+      <div class="hint">Crea tu familia. Agrega a cada persona y lee las oraciones en voz alta.</div>
+      <div class="builder">
+        <div class="fld"><label>¿Quién es?</label><select id="a-m"></select></div>
+        <div class="fld"><label>¿Cómo se llama?</label><input id="a-name" maxlength="16" placeholder="Nombre" autocomplete="off"></div>
+        <div class="fld"><label>¿Cuántos años tiene?</label><select id="a-age"></select></div>
+        <div class="fld"><label>Color de la ropa: <span id="a-cname"></span></label><div class="sw-row" id="a-sw"></div></div>
+      </div>
+      <div class="row">
+        <button class="bigbtn b-grass" onclick="addPerson()">➕ Agregar</button>
+        <button class="bigbtn b-sky" onclick="readTree()">🔊 Leer mi familia</button>
+        <button class="bigbtn b-berry" onclick="clearTree()">🗑️ Empezar otra vez</button>
+      </div>
+      <div class="feedback" id="a-fb" style="font-size:22px"></div>
+      <div class="gen"><h4>Los abuelos</h4><div class="gen-row" id="g0"></div></div>
+      <div class="gen"><h4>Los padres y los tíos</h4><div class="gen-row" id="g1"></div></div>
+      <div class="gen"><h4>Los hermanos y los primos</h4><div class="gen-row" id="g2"></div></div>
+      <div class="sentences" id="a-sent"></div>
+    </div>
+  </section>
+</div>
+
+<div class="voz" id="voz" onclick="if(event.target===this)closeVoz()">
+  <div class="card">
+    <h3>🔊 Elige la voz</h3>
+    <select id="voz-sel" onchange="pickVoice(this.value)"></select>
+    <p>Only Spanish voices installed on this computer are listed. Your choice is used whenever Voz is ON or you press a 🔊 button.</p>
+    <div class="row">
+      <button class="bigbtn b-sky" onclick="say('¡Hola! Esta es mi familia.')">▶ Probar</button>
+      <button class="bigbtn b-grass" onclick="closeVoz()">Listo</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- DATA ---------- */
+const COLORS = {
+  rojo:{hex:'#E5484D', m:'rojo', f:'roja', mp:'rojos', fp:'rojas'},
+  azul:{hex:'#2F80ED', m:'azul', f:'azul', mp:'azules', fp:'azules'},
+  amarillo:{hex:'#FFC93C', m:'amarillo', f:'amarilla', mp:'amarillos', fp:'amarillas'},
+  verde:{hex:'#3DBA5F', m:'verde', f:'verde', mp:'verdes', fp:'verdes'},
+  naranja:{hex:'#FF8A3D', m:'naranja', f:'naranja', mp:'naranjas', fp:'naranjas'},
+  morado:{hex:'#9B5DE5', m:'morado', f:'morada', mp:'morados', fp:'moradas'},
+  rosado:{hex:'#FF8FB8', m:'rosado', f:'rosada', mp:'rosados', fp:'rosadas'},
+  'café':{hex:'#8B5A2B', m:'café', f:'café', mp:'cafés', fp:'cafés'},
+  blanco:{hex:'#FFFFFF', m:'blanco', f:'blanca', mp:'blancos', fp:'blancas'},
+  negro:{hex:'#2B2622', m:'negro', f:'negra', mp:'negros', fp:'negras'},
+  gris:{hex:'#9AA0A6', m:'gris', f:'gris', mp:'grises', fp:'grises'},
+  celeste:{hex:'#8FD3F4', m:'celeste', f:'celeste', mp:'celestes', fp:'celestes'}
+};
+const CKEYS = Object.keys(COLORS);
+const MEMBERS = {
+  'abuelo': {en:'grandpa', fem:false, dress:false, scale:.95, gen:0, adult:true},
+  'abuela': {en:'grandma', fem:true,  dress:true,  scale:.95, gen:0, adult:true},
+  'papá':   {en:'dad', fem:false, dress:false, scale:1, gen:1, adult:true},
+  'mamá':   {en:'mom', fem:true,  dress:true,  scale:1, gen:1, adult:true},
+  'tío':    {en:'uncle', fem:false, dress:false, scale:1, gen:1, adult:true, nu:true},
+  'tía':    {en:'aunt', fem:true,  dress:true,  scale:1, gen:1, adult:true, nu:true},
+  'hermano':{en:'brother', fem:false, dress:false, scale:.8, gen:2},
+  'hermana':{en:'sister', fem:true,  dress:true,  scale:.8, gen:2},
+  'primo':  {en:'cousin (boy)', fem:false, dress:false, scale:.8, gen:2, nu:true},
+  'prima':  {en:'cousin (girl)', fem:true,  dress:true,  scale:.8, gen:2, nu:true},
+  'bebé':   {en:'baby', fem:false, dress:false, scale:.62, gen:2}
+};
+const ORDER = Object.keys(MEMBERS);
+const LOOK = {
+  'mamá':{skin:'#D9A06B',hair:'#3A2E1F'}, 'papá':{skin:'#D9A06B',hair:'#1E1A16'},
+  'hermano':{skin:'#E8B98A',hair:'#3A2E1F'}, 'hermana':{skin:'#E8B98A',hair:'#6B3E1F'},
+  'bebé':{skin:'#E8B98A',hair:'#6B3E1F'},
+  'abuelo':{skin:'#C98E5F',hair:'#D8D2C8'}, 'abuela':{skin:'#C98E5F',hair:'#D8D2C8'},
+  'tío':{skin:'#A86B3C',hair:'#1E1A16'}, 'tía':{skin:'#A86B3C',hair:'#6B3E1F'},
+  'primo':{skin:'#A86B3C',hair:'#1E1A16'}, 'prima':{skin:'#A86B3C',hair:'#1E1A16'}
+};
+const DEFAULT_C = {'abuelo':'café','abuela':'morado','papá':'azul','mamá':'rojo','tío':'gris','tía':'celeste',
+  'hermano':'verde','hermana':'amarillo','primo':'negro','prima':'rosado','bebé':'naranja'};
+const NUM = ['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte'];
+const NAMES_F = ['Ana','Sofía','Lucía','Camila','Rosa','Elena','Valeria','Paula','Marta','Isabel','Carmen','Julia'];
+const NAMES_M = ['Luis','Diego','Mateo','Carlos','José','Pablo','Andrés','Tomás','Javier','Hugo','Pedro','Samuel'];
+
+const $ = id => document.getElementById(id);
+const rand = a => a[Math.floor(Math.random()*a.length)];
+const shuffle = a => [...a].sort(()=>Math.random()-0.5);
+const cap = s => s.charAt(0).toUpperCase()+s.slice(1);
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zñ ]/g,'').trim();
+let mode = 'tar';
+
+const clothes = (m, ck) => MEMBERS[m].dress ? `un vestido ${COLORS[ck].m}` : `una camisa ${COLORS[ck].f}`;
+const mi = m => m==='bebé' ? 'el bebé' : 'mi ' + m;
+const ageText = a => a==null ? 'Tiene más de veinte años.' : a===1 ? 'Tiene un año.' : `Tiene ${NUM[a]} años.`;
+
+/* ---------- DRAW ---------- */
+function person(m, ck, scaleOverride){
+  const lk = LOOK[m], s = scaleOverride || MEMBERS[m].scale, c = COLORS[ck].hex, h = lk.hair, skin = lk.skin;
+  const dk = 'rgba(0,0,0,.25)';
+  let back = '', front = '', extra = '';
+  const legs = `<rect x="45" y="150" width="12" height="42" rx="6" fill="#4A3B2A"/><rect x="63" y="150" width="12" height="42" rx="6" fill="#4A3B2A"/>
+    <ellipse cx="50" cy="193" rx="10" ry="5" fill="#3A2E1F"/><ellipse cx="70" cy="193" rx="10" ry="5" fill="#3A2E1F"/>`;
+  const arms = `<rect x="18" y="98" width="16" height="52" rx="8" fill="${c}" stroke="${dk}" stroke-width="2"/>
+    <rect x="86" y="98" width="16" height="52" rx="8" fill="${c}" stroke="${dk}" stroke-width="2"/>
+    <circle cx="26" cy="153" r="7" fill="${skin}"/><circle cx="94" cy="153" r="7" fill="${skin}"/>`;
+  const body = MEMBERS[m].dress
+    ? `<path d="M36 92 H84 L98 168 Q60 176 22 168 Z" fill="${c}" stroke="${dk}" stroke-width="2"/>`
+    : `<rect x="30" y="90" width="60" height="68" rx="18" fill="${c}" stroke="${dk}" stroke-width="2"/>`;
+  const bangs = `<path d="M32 54 Q36 26 60 26 Q84 26 88 54 Q76 38 60 40 Q44 38 32 54Z" fill="${h}"/>`;
+  const shortHair = `<path d="M32 52 Q32 26 60 26 Q88 26 88 52 Q80 36 60 37 Q40 36 32 52Z" fill="${h}"/>`;
+  let smile = `<path d="M51 70 Q60 78 69 70" stroke="#3A2E1F" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+  const glasses = `<g fill="none" stroke="#3A2E1F" stroke-width="2.5"><circle cx="50" cy="58" r="8"/><circle cx="70" cy="58" r="8"/><line x1="58" y1="58" x2="62" y2="58"/></g>`;
+  if(m==='mamá'){ back = `<path d="M28 60 Q28 20 60 20 Q92 20 92 60 L96 114 Q60 124 24 114 Z" fill="${h}"/>`; front = bangs; }
+  if(m==='hermana'){ back = `<circle cx="27" cy="56" r="13" fill="${h}"/><circle cx="93" cy="56" r="13" fill="${h}"/><circle cx="34" cy="46" r="5" fill="${c}" stroke="${dk}"/><circle cx="86" cy="46" r="5" fill="${c}" stroke="${dk}"/>`; front = bangs; }
+  if(m==='papá'){ front = shortHair + `<path d="M49 69 Q60 62 71 69 Q60 73 49 69Z" fill="${h}"/>`;
+    smile = `<path d="M52 76 Q60 82 68 76" stroke="#3A2E1F" stroke-width="3" fill="none" stroke-linecap="round"/>`; }
+  if(m==='hermano'){ front = `<path d="M32 52 L35 32 L45 39 L51 25 L60 35 L69 25 L75 39 L85 32 L88 52 Q60 36 32 52Z" fill="${h}"/>`; }
+  if(m==='bebé'){ front = `<path d="M57 31 Q58 19 68 23 Q61 25 63 32" stroke="${h}" stroke-width="5" fill="none" stroke-linecap="round"/>`; }
+  if(m==='abuelo'){
+    front = `<path d="M31 64 Q28 42 38 34 L44 58Z" fill="${h}"/><path d="M89 64 Q92 42 82 34 L76 58Z" fill="${h}"/><path d="M48 70 Q60 63 72 70 Q60 75 48 70Z" fill="${h}"/>`;
+    extra = glasses; smile = `<path d="M52 77 Q60 83 68 77" stroke="#3A2E1F" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+    back = `<rect x="98" y="120" width="6" height="74" rx="3" fill="#8B5A2B"/><path d="M95 122 Q101 108 109 118" stroke="#8B5A2B" stroke-width="6" fill="none" stroke-linecap="round"/>`;
+  }
+  if(m==='abuela'){ back = `<circle cx="60" cy="24" r="14" fill="${h}"/>`; front = `<path d="M32 56 Q34 30 60 30 Q86 30 88 56 Q78 42 60 42 Q42 42 32 56Z" fill="${h}"/>`; extra = glasses; }
+  if(m==='tío'){ front = shortHair + `<path d="M33 62 Q34 92 60 92 Q86 92 87 62 Q82 82 60 84 Q38 82 33 62Z" fill="${h}"/>`; }
+  if(m==='tía'){ back = `<path d="M27 58 Q27 20 60 20 Q93 20 93 58 L93 82 Q60 90 27 82Z" fill="${h}"/>`; front = bangs;
+    extra = `<circle cx="32" cy="72" r="3.5" fill="#FFC93C"/><circle cx="88" cy="72" r="3.5" fill="#FFC93C"/>`; }
+  if(m==='primo'){ front = `<path d="M31 48 Q32 24 60 24 Q88 24 89 48Z" fill="${c}" stroke="${dk}" stroke-width="2"/><rect x="62" y="42" width="40" height="9" rx="4.5" fill="${c}" stroke="${dk}" stroke-width="2"/>`; }
+  if(m==='prima'){ back = `<path d="M84 36 Q114 46 104 96 Q96 72 80 56Z" fill="${h}"/>`; front = bangs + `<circle cx="84" cy="36" r="6" fill="${c}" stroke="${dk}"/>`; }
+  const face = `<circle cx="50" cy="58" r="3.8" fill="#3A2E1F"/><circle cx="70" cy="58" r="3.8" fill="#3A2E1F"/>
+    <circle cx="44" cy="68" r="4.5" fill="#FF6B9D" opacity=".35"/><circle cx="76" cy="68" r="4.5" fill="#FF6B9D" opacity=".35"/>${smile}${extra}`;
+  return `<svg viewBox="0 0 120 200" aria-hidden="true"><g transform="translate(60 198) scale(${s}) translate(-60 -198)">
+    ${back}${legs}${arms}${body}<circle cx="60" cy="58" r="28" fill="${skin}"/>${front}${face}</g></svg>`;
+}
+
+/* ---------- VOICE (OFF by default) ---------- */
+let voices = [], voiceName = null, voiceOn = false;
+try{ voiceName = localStorage.getItem('solVoz'); voiceOn = localStorage.getItem('solVozOn')==='1'; }catch(e){}
+function loadVoices(){
+  if(!('speechSynthesis' in window)) return;
+  voices = speechSynthesis.getVoices().filter(v=>/^es/i.test(v.lang));
+  const sel = $('voz-sel'); sel.innerHTML = '';
+  if(!voices.length){ sel.innerHTML = '<option>No Spanish voices found</option>'; return; }
+  voices.forEach(v=>{ const o = document.createElement('option'); o.value = v.name; o.textContent = v.name+' ('+v.lang+')';
+    if(v.name===voiceName) o.selected = true; sel.appendChild(o); });
+}
+if('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+function pickVoice(n){ voiceName = n; try{ localStorage.setItem('solVoz', n); }catch(e){} }
+function openVoz(){ loadVoices(); $('voz').classList.add('on'); }
+function closeVoz(){ $('voz').classList.remove('on'); }
+function renderVozToggle(){ const b = $('voz-toggle'); b.textContent = voiceOn ? '🔊 Voz: ON' : '🔇 Voz: OFF';
+  b.classList.toggle('on', voiceOn); b.classList.toggle('off', !voiceOn); }
+function toggleVoz(){ voiceOn = !voiceOn; try{ localStorage.setItem('solVozOn', voiceOn ? '1' : '0'); }catch(e){}
+  if(!voiceOn && 'speechSynthesis' in window) speechSynthesis.cancel(); renderVozToggle(); }
+function say(text){ speak(text, true); }
+function speak(text, force){
+  if(!voiceOn && !force) return;
+  if(!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text); u.lang = 'es-MX'; u.rate = .85;
+  const v = voices.find(x=>x.name===voiceName) || voices.find(x=>/es-(MX|US|419)/i.test(x.lang)) || voices[0];
+  if(v){ u.voice = v; u.lang = v.lang; }
+  speechSynthesis.speak(u);
+}
+
+/* ---------- STARS / SOUND / CONFETTI ---------- */
+let stars = 0;
+function addStar(){ stars++; $('stars').textContent = stars; if(stars % 5===0) confetti(40); }
+let actx = null;
+function tone(f,d,t,v){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); if(actx.state==='suspended') actx.resume();
+  const o = actx.createOscillator(), g = actx.createGain(); o.type = t||'triangle'; o.frequency.value = f;
+  g.gain.setValueAtTime(v||.1, actx.currentTime); g.gain.exponentialRampToValueAtTime(.0001, actx.currentTime+d);
+  o.connect(g); g.connect(actx.destination); o.start(); o.stop(actx.currentTime+d); }catch(e){} }
+function ding(){ [660,880,1100].forEach((f,i)=>setTimeout(()=>tone(f,.16),i*90)); }
+function buzz(){ tone(200,.22,'sawtooth',.05); }
+function confetti(n){
+  const cols = ['#FFC93C','#FF8A3D','#3FB8E8','#5FCB7A','#FF6B9D','#9B7BE0'];
+  for(let i=0;i<(n||40);i++){ const d = document.createElement('div'); d.className = 'confetti';
+    d.style.left = Math.random()*100+'vw'; d.style.background = rand(cols);
+    d.style.animationDelay = Math.random()*.4+'s'; d.style.animationDuration = (1.5+Math.random())+'s';
+    document.body.appendChild(d); setTimeout(()=>d.remove(), 3200); }
+}
+function showMode(m){
+  mode = m;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on', t.dataset.m===m));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  $('p-'+m).classList.add('on');
+  if('speechSynthesis' in window) speechSynthesis.cancel();
+}
+
+/* ---------- TARJETAS ---------- */
+function renderCards(){
+  const g = $('t-grid'); g.innerHTML = '';
+  ORDER.forEach(m=>{
+    const ck = DEFAULT_C[m], bg = ['blanco','amarillo','celeste','rosado'].includes(ck) ? '#3FB8E8' : COLORS[ck].hex;
+    const b = document.createElement('button'); b.className = 'flip';
+    b.innerHTML = `<div class="flip-in"><div class="face front">${MEMBERS[m].nu ? '<span class="badge-new">⭐ nuevo</span>' : ''}${person(m, ck, 1)}<div class="w">${mi(m)}</div></div>
+      <div class="face back" style="background:${bg}"><div class="w">${MEMBERS[m].en}</div><small>Tiene ${clothes(m, ck)}.</small></div></div>`;
+    b.onclick = () => { b.classList.toggle('on'); if(b.classList.contains('on')) speak(cap(mi(m)) + '. Tiene ' + clothes(m, ck) + '.'); };
+    g.appendChild(b);
+  });
+}
+
+/* ---------- EMPAREJAR ---------- */
+let eRound = [], eFound = 0, eWon = 0, eEs = null, eEn = null, eLock = false;
+function newPairs(){
+  eRound = shuffle(ORDER).slice(0,6); eFound = 0; eEs = eEn = null; eLock = false;
+  $('e-found').textContent = 0; $('e-total').textContent = eRound.length;
+  const es = $('e-es'), en = $('e-en'); es.innerHTML = ''; en.innerHTML = '';
+  shuffle(eRound).forEach(m=>{ const d = document.createElement('button'); d.className = 'pi'; d.textContent = mi(m); d.dataset.id = m; d.onclick = () => selPair(d,'es'); es.appendChild(d); });
+  shuffle(eRound).forEach(m=>{ const d = document.createElement('button'); d.className = 'pi'; d.textContent = (m==='bebé' ? 'the ' : 'my ') + MEMBERS[m].en; d.dataset.id = m; d.onclick = () => selPair(d,'en'); en.appendChild(d); });
+}
+function selPair(el, side){
+  if(eLock || el.classList.contains('ok')) return;
+  if(side==='es'){ if(eEs) eEs.classList.remove('sel'); eEs = el; } else { if(eEn) eEn.classList.remove('sel'); eEn = el; }
+  el.classList.add('sel');
+  if(eEs && eEn){
+    eLock = true;
+    if(eEs.dataset.id===eEn.dataset.id){
+      [eEs,eEn].forEach(x=>{ x.classList.remove('sel'); x.classList.add('ok'); });
+      speak(eEs.textContent); eFound++; $('e-found').textContent = eFound; addStar(); ding(); eEs = eEn = null; eLock = false;
+      if(eFound===eRound.length){ eWon++; $('e-won').textContent = eWon; confetti(30); setTimeout(newPairs, 1200); }
+    } else {
+      eEs.classList.add('bad'); eEn.classList.add('bad'); buzz();
+      setTimeout(()=>{ eEs.classList.remove('sel','bad'); eEn.classList.remove('sel','bad'); eEs = eEn = null; eLock = false; }, 650);
+    }
+  }
+}
+
+/* ---------- ¿QUIÉN ES? ---------- */
+let qTarget = null, qDone = false, qOk = 0, qTot = 0, qStreak = 0;
+function ageFor(m){ if(MEMBERS[m].adult) return null; if(m==='bebé') return 1 + Math.floor(Math.random()*2); return 3 + Math.floor(Math.random()*18); }
+const matches = (o, t) => o.m===t.m && o.c===t.c && (t.age==null || o.age===t.age);
+function newQE(){
+  qDone = false; $('q-fb').textContent = ''; $('q-fb').className = 'feedback';
+  const t = {m:rand(ORDER), c:rand(CKEYS)}; t.age = ageFor(t.m);
+  const items = [t];
+  const add = o => { if(items.length<8 && !matches(o, t) && !items.some(x=>x.m===o.m && x.c===o.c && x.age===o.age)) items.push(o); };
+  if(t.age!=null && t.m!=='bebé'){ let a; do{ a = ageFor(t.m); }while(a===t.age); add({m:t.m, c:t.c, age:a}); }
+  add({m:t.m, c:rand(CKEYS.filter(c=>c!==t.c)), age:ageFor(t.m)});
+  const sameC = rand(ORDER.filter(x=>x!==t.m)); add({m:sameC, c:t.c, age:ageFor(sameC)});
+  let guard = 0;
+  while(items.length<8 && guard++<400){ const m = rand(ORDER); add({m, c:rand(CKEYS), age:ageFor(m)}); }
+  const usedF = shuffle(NAMES_F), usedM = shuffle(NAMES_M);
+  items.forEach(o=>{ o.name = MEMBERS[o.m].fem ? usedF.pop() : usedM.pop(); });
+  qTarget = t;
+  $('q-clue').textContent = `Es ${mi(t.m)}. Tiene ${clothes(t.m, t.c)}. ${ageText(t.age)}`;
+  const grid = $('q-grid'); grid.innerHTML = '';
+  shuffle(items).forEach(o=>{
+    const b = document.createElement('button'); b.className = 'gw-card';
+    const tag = o.age==null ? '+20 años' : o.age===1 ? '1 año' : o.age + ' años';
+    b.innerHTML = person(o.m, o.c, 1) + `<div class="nm">${o.name}</div><div class="age">${tag}</div>`;
+    b.onclick = () => pickQE(b, o); grid.appendChild(b);
+  });
+  if(mode==='qe') speak($('q-clue').textContent);
+}
+function pickQE(b, o){
+  if(qDone) return;
+  const fb = $('q-fb');
+  if(o===qTarget){
+    qDone = true; qOk++; qTot++; qStreak++; b.classList.add('ok');
+    document.querySelectorAll('.gw-card').forEach(x=>{ if(x!==b) x.classList.add('dim'); });
+    const line = `¡Sí! Es ${mi(o.m)} ${o.name}.`;
+    fb.textContent = line + ' 🎉'; fb.className = 'feedback ok'; addStar(); ding(); confetti(30); speak(line);
+  } else {
+    qTot++; qStreak = 0; b.classList.remove('bad'); void b.offsetWidth; b.classList.add('bad'); buzz();
+    const line = `No. ${MEMBERS[o.m].fem ? 'Ella' : 'Él'} es ${o.name}, ${mi(o.m)}. Tiene ${clothes(o.m, o.c)}. ${ageText(o.age)}`;
+    fb.textContent = line; fb.className = 'feedback no'; speak(line);
+  }
+  $('q-ok').textContent = qOk; $('q-tot').textContent = qTot; $('q-streak').textContent = qStreak;
+}
+
+/* ---------- ¿CUÁNTAS COME? ---------- */
+const FOODS = { uvas:{one:'uva', pl:'uvas'}, gomitas:{one:'gomita', pl:'gomitas'}, galletas:{one:'galleta', pl:'galletas'}, fresas:{one:'fresa', pl:'fresas'}, manzanas:{one:'manzana', pl:'manzanas'} };
+function foodSVG(f, ck){
+  let g = '';
+  if(f==='uvas') g = `<path d="M30 12 Q32 4 38 4" stroke="#6B4A2B" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="30" cy="34" r="20" fill="#7B3FB8"/><circle cx="23" cy="27" r="6" fill="#fff" opacity=".35"/>`;
+  if(f==='gomitas'){ const c = COLORS[ck].hex;
+    g = `<g fill="${c}" stroke="rgba(0,0,0,.3)" stroke-width="1.5"><circle cx="20" cy="10" r="6"/><circle cx="40" cy="10" r="6"/><circle cx="30" cy="20" r="13"/><ellipse cx="30" cy="42" rx="16" ry="15"/><circle cx="15" cy="34" r="6"/><circle cx="45" cy="34" r="6"/><circle cx="20" cy="54" r="6"/><circle cx="40" cy="54" r="6"/></g><circle cx="25" cy="18" r="2" fill="${ck==='negro' ? '#fff' : '#3A2E1F'}"/><circle cx="35" cy="18" r="2" fill="${ck==='negro' ? '#fff' : '#3A2E1F'}"/><ellipse cx="24" cy="38" rx="4" ry="6" fill="#fff" opacity=".35"/>`; }
+  if(f==='galletas') g = `<circle cx="30" cy="30" r="25" fill="#E0A85C" stroke="#B9803A" stroke-width="3"/><g fill="#5A3A1E"><circle cx="21" cy="22" r="4"/><circle cx="37" cy="20" r="3.5"/><circle cx="30" cy="34" r="4"/><circle cx="18" cy="38" r="3"/><circle cx="41" cy="39" r="4"/></g>`;
+  if(f==='fresas') g = `<path d="M30 56 Q8 40 10 24 Q12 14 30 16 Q48 14 50 24 Q52 40 30 56Z" fill="#E5484D"/><path d="M18 14 L30 20 L42 14 L36 10 L30 14 L24 10Z" fill="#3DBA5F"/><g fill="#FFE08A"><circle cx="22" cy="28" r="1.8"/><circle cx="34" cy="26" r="1.8"/><circle cx="28" cy="36" r="1.8"/><circle cx="40" cy="34" r="1.8"/><circle cx="24" cy="42" r="1.8"/><circle cx="34" cy="44" r="1.8"/></g>`;
+  if(f==='manzanas') g = `<path d="M30 16 Q22 8 14 14 Q4 24 10 40 Q16 56 30 52 Q44 56 50 40 Q56 24 46 14 Q38 8 30 16Z" fill="#E5484D"/><path d="M30 16 Q30 8 34 4" stroke="#6B4A2B" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M33 10 Q42 4 46 10 Q40 14 33 10Z" fill="#3DBA5F"/><ellipse cx="20" cy="28" rx="4" ry="7" fill="#fff" opacity=".35"/>`;
+  return `<svg viewBox="0 0 60 60" aria-hidden="true">${g}</svg>`;
+}
+let cM = 'tía', cF = 'uvas', cN = 0, cColor = null, cDone = false, cOk = 0;
+function cFoodWord(){ return cColor ? (cN===1 ? `gomita ${COLORS[cColor].f}` : `gomitas ${COLORS[cColor].fp}`) : (cN===1 ? FOODS[cF].one : FOODS[cF].pl); }
+function newCC(){
+  cDone = false; $('c-fb').textContent = ''; $('c-fb').className = 'feedback'; $('c-in').value = '';
+  let m; do{ m = rand(ORDER); }while(m===cM); cM = m;
+  let items;
+  if($('c-col').checked){
+    cF = 'gomitas'; cColor = rand(CKEYS);
+    const total = 8 + Math.floor(Math.random()*13);
+    const others = shuffle(CKEYS.filter(c=>c!==cColor)).slice(0,3);
+    cN = 1 + Math.floor(Math.random()*Math.min(total-2, 12));
+    items = shuffle([...Array(total)].map((_,i)=>i<cN ? cColor : rand(others)));
+  } else {
+    cColor = null; cF = rand(Object.keys(FOODS));
+    let n; do{ n = 1 + Math.floor(Math.random()*20); }while(n===cN); cN = n;
+    items = [...Array(cN)].map(()=>rand(CKEYS));
+  }
+  $('c-fig').innerHTML = person(cM, DEFAULT_C[cM], 1);
+  const plate = $('c-plate'); plate.innerHTML = '';
+  items.forEach(ck=>{
+    const b = document.createElement('button'); b.className = 'food'; b.dataset.c = ck;
+    b.setAttribute('aria-label', FOODS[cF].one); b.innerHTML = foodSVG(cF, ck);
+    b.onclick = () => {
+      if(cColor && ck!==cColor){ b.classList.remove('bad'); void b.offsetWidth; b.classList.add('bad'); buzz(); return; }
+      eat(b);
+    };
+    plate.appendChild(b);
+  });
+  const pl = cColor ? `gomitas <span style="color:${COLORS[cColor].hex};${['blanco','celeste','amarillo'].includes(cColor) ? '-webkit-text-stroke:1px #3A2E1F' : ''}">${COLORS[cColor].fp}</span>` : FOODS[cF].pl;
+  $('c-prompt').innerHTML = `¿Cuántas ${pl} come ${mi(cM)}?`;
+  $('c-pre').textContent = cap(mi(cM)) + ' come';
+  $('c-post').textContent = cFoodWord() + '.';
+  if(mode==='cc') speak($('c-prompt').textContent);
+}
+function eat(b){
+  if(b.dataset.flying) return; b.dataset.flying = '1';
+  const from = b.getBoundingClientRect(), to = $('c-fig').getBoundingClientRect();
+  const dx = (to.left + to.width/2) - (from.left + from.width/2), dy = (to.top + to.height*.3) - (from.top + from.height/2);
+  const a = b.animate([{transform:'translate(0,0) scale(1)'},{transform:`translate(${dx}px,${dy}px) scale(.3)`, opacity:.2}], {duration:420, easing:'ease-in'});
+  tone(600, .1);
+  a.onfinish = () => { b.classList.add('eaten'); const f = $('c-fig'); f.classList.remove('chomp'); void f.offsetWidth; f.classList.add('chomp');
+    $('c-nam').classList.add('on'); setTimeout(()=>$('c-nam').classList.remove('on'), 450); };
+}
+function checkCC(){
+  if(cDone) return;
+  const raw = $('c-in').value.trim(), fb = $('c-fb');
+  if(!raw) return;
+  if(/\d/.test(raw)){ fb.textContent = '¡Escríbelo con letras! ✍️'; fb.className = 'feedback no'; buzz(); return; }
+  const ok = cN===1 ? ['una','uno','un'].includes(norm(raw)) : norm(raw)===norm(NUM[cN]);
+  const word = cN===1 ? 'una' : NUM[cN];
+  const full = `¡${cap(mi(cM))} come ${word} ${cFoodWord()}!`;
+  if(ok){
+    cDone = true; cOk++; $('c-ok').textContent = cOk; addStar(); ding(); confetti(30);
+    const exact = raw.toLowerCase()===word;
+    fb.textContent = (exact ? '¡Correcto! ' : `¡Correcto! Se escribe: ${word}. `) + full.replace(/^¡|!$/g,'') + ' 😋';
+    fb.className = 'feedback ok'; speak(full);
+    document.querySelectorAll('#c-plate .food').forEach((b,i)=>{ if(!b.classList.contains('eaten') && (!cColor || b.dataset.c===cColor)) setTimeout(()=>eat(b), i*90); });
+  } else {
+    fb.textContent = 'Casi... cuenta otra vez. 🔍'; fb.className = 'feedback no'; buzz();
+  }
+}
+$('c-in').addEventListener('keydown', e=>{ if(e.key==='Enter') checkCC(); });
+
+/* ---------- MI ÁRBOL FAMILIAR ---------- */
+let tree = [], aColor = 'azul';
+try{ tree = JSON.parse(localStorage.getItem('solArbol34') || '[]'); }catch(e){ tree = []; }
+function saveTree(){ try{ localStorage.setItem('solArbol34', JSON.stringify(tree)); }catch(e){} }
+function setupBuilder(){
+  $('a-m').innerHTML = ORDER.map(m=>`<option value="${m}">${mi(m)}</option>`).join('');
+  let opts = '';
+  for(let i=1;i<=20;i++) opts += `<option value="${i}">${i} · ${NUM[i]}</option>`;
+  opts += `<option value="21">+20 · ¡más de veinte!</option>`;
+  $('a-age').innerHTML = opts;
+  $('a-m').onchange = () => { const m = $('a-m').value; $('a-age').value = MEMBERS[m].adult ? '21' : m==='bebé' ? '1' : '10'; };
+  $('a-m').onchange();
+  const sw = $('a-sw'); sw.innerHTML = '';
+  CKEYS.forEach(ck=>{ const b = document.createElement('button'); b.className = 'sw' + (ck===aColor ? ' on' : ''); b.style.background = COLORS[ck].hex;
+    b.title = ck; b.setAttribute('aria-label', ck);
+    b.onclick = () => { aColor = ck; document.querySelectorAll('.sw').forEach(x=>x.classList.toggle('on', x===b)); $('a-cname').textContent = ck; speak(cap(ck)); };
+    sw.appendChild(b); });
+  $('a-cname').textContent = aColor;
+}
+function personLines(p){
+  const age = p.age>20 ? null : p.age;
+  return `${cap(mi(p.m))} se llama ${p.name}. Tiene ${clothes(p.m, p.c)}. ${ageText(age)}`;
+}
+function addPerson(){
+  const name = $('a-name').value.trim(), fb = $('a-fb');
+  if(!name){ fb.textContent = '¿Cómo se llama? Escribe el nombre. ✍️'; fb.className = 'feedback no'; $('a-name').focus(); return; }
+  if(tree.length>=16){ fb.textContent = '¡Tu familia es muy grande! Máximo 16 personas.'; fb.className = 'feedback no'; return; }
+  const p = {m:$('a-m').value, name:cap(name), c:aColor, age:parseInt($('a-age').value,10)};
+  tree.push(p); saveTree(); renderTree(); addStar(); ding();
+  fb.textContent = personLines(p); fb.className = 'feedback ok'; speak(personLines(p));
+  $('a-name').value = '';
+}
+function removePerson(i){ tree.splice(i,1); saveTree(); renderTree(); }
+function clearTree(){ if(!tree.length || confirm('¿Borrar toda tu familia y empezar otra vez?')){ tree = []; saveTree(); renderTree(); $('a-fb').textContent = ''; } }
+function summary(){
+  const out = [];
+  const count = arr => tree.filter(p=>arr.includes(p.m)).length;
+  const sib = count(['hermano','hermana']);
+  if(sib===1) out.push(tree.some(p=>p.m==='hermano') ? 'Tengo un hermano.' : 'Tengo una hermana.');
+  else if(sib>1) out.push(`Tengo ${NUM[Math.min(sib,20)]} hermanos.`);
+  const pri = count(['primo','prima']);
+  if(pri===1) out.push(tree.some(p=>p.m==='primo') ? 'Tengo un primo.' : 'Tengo una prima.');
+  else if(pri>1) out.push(`Tengo ${NUM[Math.min(pri,20)]} primos.`);
+  if(tree.length) out.push(tree.length===1 ? 'Hay una persona en mi familia.' : `Hay ${NUM[Math.min(tree.length,20)]} personas en mi familia.`);
+  return out;
+}
+function renderTree(){
+  [0,1,2].forEach(g=>$('g'+g).innerHTML = '');
+  tree.forEach((p,i)=>{
+    const d = document.createElement('div'); d.className = 'tree-card';
+    const tag = p.age>20 ? '+20' : p.age;
+    d.innerHTML = `<button class="x" aria-label="Quitar" onclick="removePerson(${i})">✖</button>${person(p.m, p.c, 1)}<div class="nm">${p.name}</div><div class="rl">${mi(p.m)} · ${tag} ${p.age===1 ? 'año' : 'años'}</div>`;
+    $('g'+MEMBERS[p.m].gen).appendChild(d);
+  });
+  [0,1,2].forEach(g=>{ if(!$('g'+g).children.length) $('g'+g).innerHTML = '<span class="empty">Nadie todavía</span>'; });
+  const lines = tree.map(personLines).concat(summary());
+  $('a-sent').innerHTML = lines.length ? '<b>Mi familia</b><br>' + lines.join('<br>') : '<span class="empty">Tus oraciones aparecen aquí. ✨</span>';
+}
+function readTree(){ if(tree.length) say('Mi familia. ' + tree.map(personLines).concat(summary()).join(' ')); }
+
+/* ---------- START ---------- */
+renderVozToggle(); renderCards(); newPairs(); newQE(); newCC(); setupBuilder(); renderTree();
+
+</script>
+</body>
+</html>
